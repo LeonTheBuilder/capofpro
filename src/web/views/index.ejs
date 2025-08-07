@@ -1,124 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('_head.ejs'); %>
-<%- include(`${appcfg.nodeModulesPath}/aframework/web/_confirmDialog.ejs`); %>
-<!---------------------------------------------------------------------------------------------------------------->
-<div class="hero  rounded-box  w-full">
-    <div class="hero-content text-center">
-        <div>
-            <h1 class="text-lg font-bold">api4ai</h1>
-            <p class="py-3 text-xs">
-                占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字占位置文字
-            </p>
-        </div>
-    </div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div class=" w-full bg-neutral text-neutral-content shadow-sm card p-2" v-for="i in [11,1,1,1,1]">
+        <p>
+            <span style="color: red;">机构大额买入</span>
+        A card component has a figure, a body part, and inside body there are title and actions parts
+        </p>
+        <p class="label-xs text-neutral-content">2025-08-07 by CapOfPro</p>
 </div>
-
-<!---------------------------------------------------------------------------------------------------------------->
-
-<div class="join">
-    <input class="input join-item w-full" v-model="siteUrl" placeholder="API文档页面地址"
-           @input="guessSite"/>
-    <button class="btn join-item btn-neutral" @click="ingestUrl">
-
-        开始
-    </button>
-</div>
-
-
-<!---------------------------------------------------------------------------------------------------------------->
-<ul class="bg-base-200  rounded-box w-full" v-if="false">
-    <li class="p-2 border border-base-300" v-for="guessedSite in guessedSites">
-        <div>
-            <div class="label ">${guessedSite.title || "网站标题"}</div>
-            <div class="badge badge-ghost badge-xs" v-if="guessedSite.exactMatch">精准匹配</div>
-        </div>
-        <div class="text-sm font-semibold opacity-60">
-            ${guessedSite.url}
-        </div>
-        <div class="flex justify-end">
-            <button class="btn btn-neutral btn-sm" @click="ingestSite">
-                Ingest
-            </button>
-        </div>
-    </li>
-</ul>
-<!---------------------------------------------------------------------------------------------------------------->
-<div role="alert" class="alert alert-error alert-soft"
-     v-if="site.downloadSifStatus==='f' || site.ingestSifStatus==='f'">
-    <span>服务器错误, 点击开始按钮重试. </span>
-</div>
-<div v-else>
-    <div role="alert" class="alert" v-if="userEventMessage">
-     <span class="loading loading-spinner loading-xs"
-           v-if="site.downloadSifStatus==='i' || site.ingestSifStatus==='i'"></span>
-        <span>${userEventMessage}</span>
-    </div>
-</div>
-
-
-<!---------------------------------------------------------------------------------------------------------------->
-<div class="stats stats-vertical lg:stats-horizontal shadow-sm" v-if="siteId">
-    <div class="stat">
-        <div class="stat-title">Pages</div>
-        <div class="stat-value">
-            <a :href="'/pages?siteId='+siteId" target="_blank">${site.pageNum}</a>
-
-        </div>
-        <div class="stat-desc">${site.pageExtractedNum} extracted</div>
-    </div>
-    <div class="stat">
-        <div class="stat-title">Tasks</div>
-        <div class="stat-value">${site.commonTaskNumTotal + site.apiTaskNumTotal}</div>
-        <div class="stat-desc">${site.commonTaskSNum + site.apiTaskSNum} done</div>
-    </div>
-    <div class="stat">
-        <div class="stat-title">Prompt Tokens</div>
-        <div class="stat-value">${site.prompt_tokens}</div>
-    </div>
-    <div class="stat">
-        <div class="stat-title">Completion Tokens</div>
-        <div class="stat-value">${site.completion_tokens}</div>
-    </div>
-</div>
-<!---------------------------------------------------------------------------------------------------------------->
-<div class="flex flex-col p-0 w-full space-y-1" v-if="site.ingestSifStatus ==='s'">
-    <div class="flex justify-end">
-        <button class="btn btn-neutral btn-sm px-10" @click="downloadText">下载</button>
-    </div>
-    <textarea class="textarea whitespace-normal w-full label h-77" v-model="singleIngestText"
-              placeholder="API Ingest 结果"></textarea>
-</div>
-<!---------------------------------------------------------------------------------------------------------------->
-<div class="overflow-x-auto bg-base-200  rounded-box w-full">
-    <table class="table table-xs">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Url</th>
-            <th>Pages</th>
-            <th>Tokens</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="siteRow in allSites">
-            <th>${siteRow.title || "网站标题"}</th>
-            <td><a :href="siteRow.url">${siteRow.url}</a></td>
-            <td>${siteRow.pageNum}</td>
-            <td>${siteRow.prompt_tokens} / ${siteRow.completion_tokens}</td>
-            <td>
-                <button class="btn btn-sm btn-link" @click="deleteSiteConfirm(siteRow)">Delete</button>
-                <button class="btn btn-sm btn-link" @click="ingestSite(siteRow)">Ingest</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-
-<!--<button class="btn btn-neutral btn-sm" @click="logout">logout</button>-->
-
+<!--------------------------------------------------------------------------------------------------------------------->
 <%- include('_bottom.ejs'); %>
 <script type="text/javascript">
     <%- include('index.js'); %>

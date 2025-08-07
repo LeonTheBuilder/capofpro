@@ -11,9 +11,10 @@
     "sequelize": "^6.37.7"
   },
   "dependencies": {
-    "aframework": "git+https://gitee.com/leonononon/aframework.git",
+    "aframework": "git+https://github.com/LeonTheBuilder/aframework.git",
+    "user_service": "git+https://github.com/LeonTheBuilder/user_service.git",
+    "ai_service": "git+https://github.com/LeonTheBuilder/ai_service.git",
     "cheerio": "^1.1.0",
-    "openai": "^5.10.1",
     "puppeteer": "^24.10.0",
     "vm2": "^3.9.19"
   }

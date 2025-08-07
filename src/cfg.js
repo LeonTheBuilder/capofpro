@@ -12,6 +12,8 @@ cfg.genFolder = path.join(__dirname, 'gen');
 cfg.typeJsFolder = __dirname;
 cfg.autowire.folders = [
     __dirname,
+    path.join(nodeModulesPath, "user_service"),
+    path.join(nodeModulesPath, "ai_service"),
 ];
 //----------------------------------------------------------------
 cfg.web.port = 3015;
@@ -25,24 +27,11 @@ cfg.app.chromeExecutablePath = process.env.APP_CHROME_PATH || '/Applications/Goo
 cfg.app.defaultLlmModel = process.env.APP_DEFAULT_LLM_MODEL || 'qwen-plus';
 cfg.app.chromeDriverPath = process.env.APP_CHROME_DRIVER_PATH || '/Users/chence/dev/chromedriver';
 cfg.app.tempFolderRoot = process.env.APP_TEMP_FOLDER_ROOT || '/Users/chence/dev/tmp';
-cfg.llm = {
-    bailian: {
-        baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-        apiKey: process.env.APP_LLM_BAILIAN_API_KEY || 'sk-',
-        // model: 'qwen-plus',
-        useProxy: false,
-        model: 'qwen-turbo-latest',
-        proxyUrl: 'http://127.0.0.1:7890',
-        maxToken: 8000,
-    },
-    volcengine: {
-        baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-        apiKey: process.env.APP_LLM_VOLCENGINE_API_KEY || 'sk-',
-        // model: 'qwen-plus',
-        useProxy: false,
-        model: 'qwen-turbo-latest',
-        proxyUrl: 'http://127.0.0.1:7890',
-    },
-}
+//----------------------------------------------------------------
+const userServiceSet = require('user_service/src/cfgset');
+userServiceSet(cfg);
+//----------------------------------------------------------------
+const aiServiceSet = require('ai_service/src/cfgset');
+aiServiceSet(cfg);
 //----------------------------------------------------------------
 module.exports = cfg;
