@@ -212,10 +212,47 @@ const Event = db.define('Event',
 );
 
 
+// 股票十大股东
+const StockHolders = db.define('StockHolders',
+    {
+        id: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+            primaryKey: true,
+        },
+        stockId: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+        },
+        dateInt: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        // 股东名称
+        name: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        // 持股比例
+        ratio: {
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: false,
+        }
+    },
+    {
+        charset: 'utf8mb4',
+        timestamps: true,
+        createdAt: true,
+        updatedAt: true,
+    }
+);
+
+
 module.exports = {
     CapFlow,
     StockBigTrade,
     StockState,
+    StockHolders,
     Scale,
     Event,
 };
