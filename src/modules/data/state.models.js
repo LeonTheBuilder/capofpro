@@ -229,8 +229,8 @@ const StockHolders = db.define('StockHolders',
             allowNull: false,
         },
         // 股东名称
-        name: {
-            type: DataTypes.STRING(255),
+        tradeId: {
+            type: DataTypes.STRING(25),
             allowNull: false,
         },
         // 持股比例

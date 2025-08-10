@@ -36,8 +36,8 @@ class OuterDataService {
             const sbdArgsSell = {
                 title: trade.sellDept
             };
-            const buyDeptId = await this.subjectService.upsertSecurityBusinessDepartment(sbdArgsBuy);
-            const sellDeptId = await this.subjectService.upsertSecurityBusinessDepartment(sbdArgsSell);
+            const buyDeptId = await this.subjectService.upsertTrader(sbdArgsBuy);
+            const sellDeptId = await this.subjectService.upsertTrader(sbdArgsSell);
             // ------------------------------------------------------------
             // 插入大宗交易订单
             const bigTradeArgs = {
@@ -56,20 +56,38 @@ class OuterDataService {
             // ------------------------------------------------------------
             // 插入股票数据
             const productArgs = {
-                code: stockCode,
-                title: stock.stockBasicInfo.name,
-                price: stock.stockBasicInfo.price
+                code: stockBasicInfo.code,
+                title: stockBasicInfo.name,
+                price: stockBasicInfo.price
             };
             await this.productService.upsertStock(productArgs);
             // ------------------------------------------------------------
             // 插入股票状态
             const stateArgs = {
-                code: stockCode,
-                title: stock.stockBasicInfo.name,
+                code: stockBasicInfo.code,
+                title: stockBasicInfo.name,
             }
             await this.stateService.upsertStockState(stateArgs);
             // ------------------------------------------------------------
             for (const holder of tenHolders) {
+                const {
+                    name
+                } = holder;
+
+                const upsertTradeArgs = {
+                    name
+                };
+                // 插入持股人信息
+                const traderId = await this.subjectService.upsertTrader(upsertTradeArgs);
+                //
+                const upsertHoldArgs = {
+                    stockId: stockBasicInfo.code,
+                    holderId: traderId,
+                    amount: holder.amount,
+                    ratio: holder.ratio,
+                };
+                // 插入持股信息
+                await this.stateService.upsertStockHolders(upsertHoldArgs);
 
             }
         }

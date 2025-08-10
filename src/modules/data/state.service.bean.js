@@ -65,6 +65,21 @@ class StateService {
         return stockBigTrade.id;
     }
 
+
+    async upsertStockHolders(args) {
+        //
+        const {
+            traderId,
+            stockId,
+            amount,
+            ratio,
+            holdType  // flow | fix 分别表示可流通股和不可流通股
+        } = args;
+        // todo impl
+        
+
+    }
+
 }
 
 module.exports = StateService;

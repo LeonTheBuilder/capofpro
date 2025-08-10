@@ -5,12 +5,12 @@ const DataTypes = a.models.DataTypes;
 // 基金经理
 const FundManager = db.define('FundManager',
     {
-        id: { 
+        id: {
             type: DataTypes.STRING(25),
             allowNull: false,
             primaryKey: true,
         },
-        name: { 
+        name: {
             type: DataTypes.STRING(255),
             allowNull: false,
         },
@@ -27,7 +27,7 @@ const FundManager = db.define('FundManager',
 // 营业部
 const SecurityBusinessDepartment = db.define('SecurityBusinessDepartment',
     {
-        id: { 
+        id: {
             type: DataTypes.STRING(25),
             allowNull: false,
             primaryKey: true,
@@ -46,14 +46,18 @@ const SecurityBusinessDepartment = db.define('SecurityBusinessDepartment',
 );
 
 // 机构
-const Institution = db.define('Institution',
+const Trader = db.define('Trader',
     {
-        id: { 
+        id: {
             type: DataTypes.STRING(25),
             allowNull: false,
             primaryKey: true,
         },
         title: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        type: {   // 机构|个人
             type: DataTypes.STRING(255),
             allowNull: false,
         },
@@ -67,9 +71,8 @@ const Institution = db.define('Institution',
 );
 
 
-
 module.exports = {
     FundManager,
     SecurityBusinessDepartment,
-    Institution,
+    Trader,
 };
