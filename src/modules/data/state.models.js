@@ -213,7 +213,7 @@ const Event = db.define('Event',
 
 
 // 股票十大股东
-const StockHolders = db.define('StockHolders',
+const StockHolding = db.define('StockHolding',
     {
         id: {
             type: DataTypes.STRING(25),
@@ -229,7 +229,12 @@ const StockHolders = db.define('StockHolders',
             allowNull: false,
         },
         // 股东名称
-        tradeId: {
+        traderId: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+        },
+        // 股东名称
+        holdType: {
             type: DataTypes.STRING(25),
             allowNull: false,
         },
@@ -252,7 +257,7 @@ module.exports = {
     CapFlow,
     StockBigTrade,
     StockState,
-    StockHolders,
+    StockHolding,
     Scale,
     Event,
 };

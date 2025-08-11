@@ -66,17 +66,44 @@ class StateService {
     }
 
 
-    async upsertStockHolders(args) {
+    async upsertStockHolding(args) {
         //
         const {
             traderId,
             stockId,
             amount,
             ratio,
-            holdType  // flow | fix 分别表示可流通股和不可流通股
+            holdType,  // flow | fix 分别表示可流通股和不可流通股
+            updateDateInt, // 披露日期
         } = args;
         // todo impl
-        
+        let stockHolding = await this.StockHolding.findOne({
+            where: {
+                traderId,
+                stockId,
+                holdType,
+                dateInt: updateDateInt,
+            }
+        });
+        if (stockHolding) {
+            return;
+        }
+
+        const id = await this.idgen.next();
+        stockHolding = this.StockHolding.build({
+            id
+        });
+        stockHolding.set({
+            traderId,
+            stockId,
+            holdType,
+            dateInt: updateDateInt,
+            amount,
+            ratio,
+        });
+
+        await stockHolding.save();
+
 
     }
 

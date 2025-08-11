@@ -87,7 +87,7 @@ class OuterDataService {
                     ratio: holder.ratio,
                 };
                 // 插入持股信息
-                await this.stateService.upsertStockHolders(upsertHoldArgs);
+                await this.stateService.upsertStockHolding(upsertHoldArgs);
 
             }
         }
