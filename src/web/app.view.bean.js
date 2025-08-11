@@ -1,4 +1,4 @@
-class UserViewController {
+class AppViewController {
     index = async (ctx) => {
         await ctx.render('index');
     };
@@ -11,4 +11,4 @@ class UserViewController {
     ];
 }
 
-module.exports = UserViewController;
+module.exports = AppViewController;

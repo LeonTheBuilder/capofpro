@@ -14,6 +14,7 @@
     "aframework": "git+https://github.com/LeonTheBuilder/aframework.git",
     "user_service": "git+https://github.com/LeonTheBuilder/user_service.git",
     "ai_service": "git+https://github.com/LeonTheBuilder/ai_service.git",
-    "message_service": "git+https://github.com/LeonTheBuilder/message_service.git"
+    "message_service": "git+https://github.com/LeonTheBuilder/message_service.git",
+    "web_resources": "git+https://github.com/LeonTheBuilder/web_resources.git"
   }
 }
