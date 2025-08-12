@@ -1,16 +1,20 @@
 createApp({
-    data: {
-
-    },
+    data: {},
     methods: {
         init: async function () {
             let self = this;
             self.initListeners();
-            // EventOp.pub(IndexEventsDef.checkToken);
-
+            EventOp.pub(CommonEventsDef.page_ready);
         },
         initListeners: function () {
             let self = this;
+            EventOp.sub(CommonEventsDef.page_ready, self.getBigTradeReportData);
         },
+        getBigTradeReportData: async function () {
+            //
+            const res = await reportService.getBigTradeReport();
+            errMsgIf(res);
+ 
+        }
     }
 });
