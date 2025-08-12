@@ -20,9 +20,7 @@ cfg.mysql.database = 'capofpro';
 cfg.mysql.serverTimezone = 'Asia/Shanghai';
 //----------------------------------------------------------------
 cfg.app.storageRoot = process.env.APP_STORAGE_ROOT || '/Users/chence/dev/tmp';
-cfg.app.chromeExecutablePath = process.env.APP_CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 cfg.app.defaultLlmModel = process.env.APP_DEFAULT_LLM_MODEL || 'qwen-plus';
-cfg.app.chromeDriverPath = process.env.APP_CHROME_DRIVER_PATH || '/Users/chence/dev/chromedriver';
 cfg.app.tempFolderRoot = process.env.APP_TEMP_FOLDER_ROOT || '/Users/chence/dev/tmp';
 //----------------------------------------------------------------
 const userServiceSet = require('user_service/src/cfgset');
