@@ -73,8 +73,8 @@ class StateService {
             stockId,
             amount,
             ratio,
-            holdType,  // flow | fix 分别表示可流通股和不可流通股
-            updateDateInt, // 披露日期
+            holdType = 'flow',  // flow | fix 分别表示可流通股和不可流通股
+            updateDateInt = "1", // 披露日期
         } = args;
         // todo impl
         let stockHolding = await this.StockHolding.findOne({

@@ -12,7 +12,7 @@ const FundManager = db.define('FundManager',
         },
         name: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {
@@ -55,11 +55,11 @@ const Trader = db.define('Trader',
         },
         title: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
         type: {   // 机构|个人
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {

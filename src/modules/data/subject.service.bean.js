@@ -27,7 +27,6 @@ class SubjectService {
 
     async upsertTrader(args) {
         const {
-            id,
             title,
             type,
         } = args;
@@ -45,7 +44,7 @@ class SubjectService {
         await trader.save();
 
 
-        return id;
+        return trader.id;
     }
 
 }

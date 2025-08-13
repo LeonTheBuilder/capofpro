@@ -104,41 +104,41 @@ const StockBigTrade = db.define('StockBigTrade',
         },
         stockId: {
             type: DataTypes.STRING(25),
-            allowNull: false,
+            allowNull: true,
         },
         dateInt: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         // 价格
         price: { // 元
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
         tradePrice: { // 交易价格
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
 
         tradeVolume: { // 交易数量（万股）
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
         tradeAmount: { // 交易额（万）
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
         premiumRate: { // 溢价率（百分比）
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
         instBuyId: {
             type: DataTypes.STRING(25),
-            allowNull: false,
+            allowNull: true,
         },
         instSellId: {
             type: DataTypes.STRING(25),
-            allowNull: false,
+            allowNull: true,
         }
     },
     {
@@ -225,28 +225,28 @@ const StockHolding = db.define('StockHolding',
         },
         stockId: {
             type: DataTypes.STRING(25),
-            allowNull: false,
+            allowNull: true,
         },
         dateInt: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         // 股东名称
         traderId: {
             type: DataTypes.STRING(25),
-            allowNull: false,
+            allowNull: true,
         },
         holdType: {
             type: DataTypes.STRING(25),
-            allowNull: false,
+            allowNull: true,
         },
         holdQuantity: { // 持股数量（万股）
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
         holdRatio: { // 持股比例
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         }
     },
     {

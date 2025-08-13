@@ -38,11 +38,11 @@ const Stock = db.define('Stock',
         },
         title: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
         price: {
             type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
+            allowNull: true,
         },
         // -----------------
         totalMarketValue: { // 总市值：亿
@@ -81,7 +81,7 @@ const Option = db.define('Option',
         },
         title: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {
@@ -102,7 +102,7 @@ const Futures = db.define('Futures',
         },
         title: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {
@@ -123,7 +123,7 @@ const Sector = db.define('Sector',
         },
         title: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {
