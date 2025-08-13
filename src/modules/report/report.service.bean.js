@@ -8,7 +8,7 @@ class ReportService {
         } = args;
         //
         if (!dateInt) {
-            let lastTradingDayStr = this.StockTradingDay.getTradingDay();
+            let lastTradingDayStr = this.stockTradingDay.getTradingDay();
             const lastTradingDayDate = this.Sugar.string2date(lastTradingDayStr, "YYYY-MM-DD");
             lastTradingDayStr = this.Sugar.string2date(lastTradingDayDate, "YYYYMMDD");
             dateInt = parseInt(lastTradingDayStr);

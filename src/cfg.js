@@ -1,13 +1,11 @@
 const path = require('path');
 const cfgdef = require('aframework/cfgdef');
-
 //----------------------------------------------------------------
 const cfg = cfgdef();
-const nodeModulesPath = path.join(__dirname, "..", 'node_modules');
-cfg.nodeModulesPath = nodeModulesPath; // ejs 页面里面使用了这个路径
 //----------------------------------------------------------------
 cfg.app.name = 'capofpro';
 cfg.app.rootFolder = path.join(__dirname, '..');
+const nodeModulesPath = path.join(__dirname, "..", 'node_modules');
 cfg.autowire.folders = [
     __dirname,
     path.join(nodeModulesPath, "user_service"),

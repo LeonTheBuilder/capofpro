@@ -18,7 +18,7 @@ const Fund = db.define('Fund',
         price: {
             type: DataTypes.DECIMAL(12, 4),
             allowNull: false,
-        },
+        }
     },
     {
         charset: 'utf8mb4',
@@ -44,6 +44,24 @@ const Stock = db.define('Stock',
             type: DataTypes.DECIMAL(65, 30),
             allowNull: false,
         },
+        // -----------------
+        totalMarketValue: { // 总市值：亿
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: true,
+        },
+        circulatingMarketValue: { // 流通市值：亿
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: true,
+        },
+        priceToBookRatio: { // 市净率
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: true,
+        },
+        priceEarningsRatioDynamic: {  // 市盈率(动)
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: true,
+        },
+
     },
     {
         charset: 'utf8mb4',

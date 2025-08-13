@@ -3,9 +3,6 @@ const db = a.db;
 const DataTypes = a.models.DataTypes;
 
 
-// 成交量、换手量、机构持股比例
-
-// 价格
 const StockState = db.define('StockState',
     {
         id: {
@@ -21,65 +18,60 @@ const StockState = db.define('StockState',
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        // 价格
-        price: { // 元
-            type: DataTypes.DECIMAL(65, 30),
-            allowNull: false,
-        },
-        // 价格浮动百分比
-        priceRatioDay: {
+        // -----------------
+        totalMarketValue: { // 总市值：亿
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        priceRatioDay3: {
+        circulatingMarketValue: { // 流通市值：亿
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        priceRatioDay5: {
+        priceToBookRatio: { // 市净率
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        // 换手率
-        turnoverRatioDay: {
+        priceEarningsRatioDynamic: {  // 市盈率(动)
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        turnoverRatioDay3: {
+        // -----------------
+        openPrice: { // 今开
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        turnoverRatioDay5: {
+        highestPrice: { // 最高
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        // 换手量
-        turnoverDay: {
+        lowestPrice: { // 最低
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        turnoverDay3: {
+        previousClose: { // 昨收
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        turnoverDay5: {
+        amplitude: { // 振幅 (%)
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        // 资金流出入净额万元
-        capFlowDay: {
+        // -----------------
+
+        tradingVolume: { // 成交量 (万)
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        capFlowDay3: {
+        turnover: {  // 成交额（亿）
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        capFlowDay5: {
+        turnoverRate: { // 换手律 (%)
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
-        // 资金流入万元
-        capFlowIn: {
+        // -----------------
+        capFlowIn: { // 资金流入（万）
             type: DataTypes.DECIMAL(65, 30),
             allowNull: true,
         },
@@ -103,8 +95,6 @@ const StockState = db.define('StockState',
     }
 );
 
-
-// 规模
 const StockBigTrade = db.define('StockBigTrade',
     {
         id: {
@@ -125,7 +115,20 @@ const StockBigTrade = db.define('StockBigTrade',
             type: DataTypes.DECIMAL(65, 30),
             allowNull: false,
         },
-        amount: { // 多少股票
+        tradePrice: { // 交易价格
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: false,
+        },
+
+        tradeVolume: { // 交易数量（万股）
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: false,
+        },
+        tradeAmount: { // 交易额（万）
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: false,
+        },
+        premiumRate: { // 溢价率（百分比）
             type: DataTypes.DECIMAL(65, 30),
             allowNull: false,
         },
@@ -233,13 +236,15 @@ const StockHolding = db.define('StockHolding',
             type: DataTypes.STRING(25),
             allowNull: false,
         },
-        // 股东名称
         holdType: {
             type: DataTypes.STRING(25),
             allowNull: false,
         },
-        // 持股比例
-        ratio: {
+        holdQuantity: { // 持股数量（万股）
+            type: DataTypes.DECIMAL(65, 30),
+            allowNull: false,
+        },
+        holdRatio: { // 持股比例
             type: DataTypes.DECIMAL(65, 30),
             allowNull: false,
         }
