@@ -53,8 +53,8 @@ class OuterDataService {
             const sbdArgsSell = {
                 title: trade.sellDeptName
             };
-            const buyDeptId = await this.subjectService.upsertTrader(sbdArgsBuy);
-            const sellDeptId = await this.subjectService.upsertTrader(sbdArgsSell);
+            const buyDeptId = await this.subjectService.upsertSecurityBusinessDepartment(sbdArgsBuy);
+            const sellDeptId = await this.subjectService.upsertSecurityBusinessDepartment(sbdArgsSell);
             // ------------------------------------------------------------
 
             // 删除原有的大宗交易订单
@@ -71,7 +71,7 @@ class OuterDataService {
                 dateInt: tradeDateInt,
                 tradePrice: trade.tradePrice,
                 tradeVolume: trade.tradeVolume,
-                tradeAmount: trade.tradeVolume,
+                tradeAmount: trade.tradeVolume * trade.tradePrice,
                 premiumRate: trade.premiumRate,
                 instBuyId: buyDeptId,
                 instSellId: sellDeptId,

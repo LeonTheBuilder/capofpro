@@ -8,10 +8,9 @@ class ReportService {
         } = args;
         //
         if (!dateInt) {
-            let lastTradingDayStr = this.stockTradingDay.getTradingDay();
-            const lastTradingDayDate = this.Sugar.string2date(lastTradingDayStr, "YYYY-MM-DD");
-            lastTradingDayStr = this.Sugar.date2string(lastTradingDayDate, "YYYYMMDD");
-            dateInt = parseInt(lastTradingDayStr);
+            // 查询 StockBigTrade 表里里面 dateInt 最大的值
+            dateInt = await this.StockBigTrade.max('dateInt');
+            this.log.info('dateInt', dateInt);
         }
 
         // ------------------------------------------------
@@ -22,7 +21,7 @@ class ReportService {
             },
             limit: args.limit,
             order: [
-                ['amount', 'DESC'],
+                ['tradeAmount', 'DESC'],
             ]
         });
 
@@ -31,7 +30,7 @@ class ReportService {
         // stocks
         const stocks = await this.Stock.findAll({
             where: {
-                code: {
+                id: {
                     [this.Sequelize.Op.in]: bigTrades.map(trade => trade.stockId)
                 }
             }

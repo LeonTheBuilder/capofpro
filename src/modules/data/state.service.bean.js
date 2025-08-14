@@ -34,29 +34,12 @@ class StateService {
 
     async upsertStockBigTrade(args) {
         //
-        const {
-            stockId,
-            dateInt,
-            price,
-            amount,
-            instBuyId,
-            instSellId,
-        } = args;
+        const {} = args;
         // 以 stockId、instBuyId、instSellId 为唯一键
-        let stockBigTrade = await this.StockBigTrade.findOne({
-            where: {
-                stockId,
-                dateInt,
-                instBuyId,
-                instSellId,
-            }
+        const id = await this.idgen.next();
+        let stockBigTrade = this.StockBigTrade.build({
+            id
         });
-        if (!stockBigTrade) {
-            const id = await this.idgen.next();
-            stockBigTrade = this.StockBigTrade.build({
-                id
-            });
-        }
         stockBigTrade.set(args);
         await stockBigTrade.save();
         return stockBigTrade.id;
