@@ -8,11 +8,8 @@ class StateService {
             turnoverRatioDay, turnoverRatioDay3, turnoverRatioDay5,
             turnoverDay, turnoverDay3, turnoverDay5,
             capFlowDay, capFlowDay3, capFlowDay5,
-            capFlowIn, capFlowOut
+            capFlowIn, capFlowOut, dateInt
         } = args;
-        //
-        const dateInt = this.timeHelper.dateInt();
-        const hourInt = this.timeHelper.hourInt();
         //
         let stockState = await this.StockState.findOne({
             where: {
@@ -81,7 +78,6 @@ class StateService {
             where: {
                 traderId,
                 stockId,
-                holdType,
                 dateInt: updateDateInt,
             }
         });

@@ -2,7 +2,7 @@ class OuterDataService {
 
     async onData(args) {
         const {
-            dataType, // dzjy
+            dataType, //  dzjy
             data
         } = args;
         //
@@ -13,6 +13,8 @@ class OuterDataService {
         }
     }
 
+
+    // 同花顺的大宗交易数据
     async onDzjyData(args) {
         const {
             dataType, // dzjy
@@ -20,6 +22,7 @@ class OuterDataService {
         } = args;
 
         // ------------------------------------------------------------
+        const tradeDateInt = data.tradeDate;
         const trades = data.trades;
         for (const trade of trades) {
             // ------------------------------------------------------------
@@ -53,10 +56,19 @@ class OuterDataService {
             const buyDeptId = await this.subjectService.upsertTrader(sbdArgsBuy);
             const sellDeptId = await this.subjectService.upsertTrader(sbdArgsSell);
             // ------------------------------------------------------------
+
+            // 删除原有的大宗交易订单
+            await this.StockBigTrade.destroy({
+                where: {
+                    stockId: trade.stockCode,
+                    dateInt: tradeDateInt,
+                }
+            });
+
             // 插入大宗交易订单
             const bigTradeArgs = {
                 stockId: trade.stockCode,
-                dateInt: trade.dateInt,
+                dateInt: tradeDateInt,
                 tradePrice: trade.tradePrice,
                 tradeVolume: trade.tradeVolume,
                 tradeAmount: trade.tradeVolume,
@@ -72,7 +84,7 @@ class OuterDataService {
 
         // 循环 stockMap 的key
         for (const stockCode of Object.keys(stockMap)) {
-            const {stockBasicInfo, tenHolders} = stockMap[stockCode];
+            const {stockBasicInfo, tenHolders, holderDataUpdateDate} = stockMap[stockCode];
 
             if (!stockBasicInfo) {
                 continue;
@@ -105,7 +117,7 @@ class OuterDataService {
                     totalMarketValue: stockBasicInfo.totalMarketValue,
                     circulatingMarketValue: stockBasicInfo.circulatingMarketValue,
                     priceToBookRatio: stockBasicInfo.priceToBookRatio,
-                    priceEarningsRatioDynamic: stockBasicInfo.priceEarningsRatioDynamic,
+                    priceEarningsRatioDynamic: parseFloat(stockBasicInfo.priceEarningsRatioDynamic),
                 };
             await this.productService.upsertStock(productArgs);
             // ------------------------------------------------------------
@@ -113,11 +125,11 @@ class OuterDataService {
             const stateArgs = {
                 stockId: stockBasicInfo.code,
                 code: stockBasicInfo.code,
-                dateInt: stockBasicInfo.dateInt,
+                dateInt: tradeDateInt,
                 totalMarketValue: stockBasicInfo.totalMarketValue,
                 circulatingMarketValue: stockBasicInfo.circulatingMarketValue,
                 priceToBookRatio: stockBasicInfo.priceToBookRatio,
-                priceEarningsRatioDynamic: stockBasicInfo.priceEarningsRatioDynamic,
+                priceEarningsRatioDynamic: parseFloat(stockBasicInfo.priceEarningsRatioDynamic),
                 openPrice: stockBasicInfo.openPrice,
                 highestPrice: stockBasicInfo.highestPrice,
                 lowestPrice: stockBasicInfo.lowestPrice,
@@ -164,6 +176,7 @@ class OuterDataService {
                 const upsertHoldArgs = {
                     stockId: stockBasicInfo.code,
                     traderId: traderId,
+                    updateDateInt: holderDataUpdateDate,
                     holdType: holder.holdType,
                     holdQuantity: holder.holdQuantity,
                     holdRatio: holder.holdRatio,
