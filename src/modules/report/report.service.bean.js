@@ -13,13 +13,12 @@ class ReportService {
             this.log.info('dateInt', dateInt);
         }
 
+        pageSize = pageSize || 5;
+
         // ------------------------------------------------
         // big trades
         const bigTrades = await this.StockBigTrade.findAll({
-            where: {
-                dateInt: dateInt,
-            },
-            limit: args.limit,
+            limit: pageSize,
             order: [
                 ['tradeAmount', 'DESC'],
             ]
