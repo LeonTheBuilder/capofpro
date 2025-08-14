@@ -8,13 +8,13 @@ createApp({
         },
         initListeners: function () {
             let self = this;
-            EventOp.sub(CommonEventsDef.page_ready, self.getBigTradeReportData);
+            EventOp.sub(CommonEventsDef.page_ready, [self.getBigTradeReportData]);
         },
         getBigTradeReportData: async function () {
             //
             const res = await reportService.getBigTradeReport();
             errMsgIf(res);
- 
+            console.log(res);
         }
     }
 });

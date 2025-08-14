@@ -36,7 +36,6 @@ class ReportService {
             }
         });
 
-
         // ------------------------------------------------
         // insts
         const buyInsts = await this.SecurityBusinessDepartment.findAll({
@@ -55,19 +54,20 @@ class ReportService {
         });
 
 
-        return {
-            bigTrades,
+        const ret = {
+            bigTradesList: bigTrades,
             stocks,
-            buyInsts,
-            sellInsts
+            insts: [...buyInsts, ...sellInsts],
         };
+
+        return ret;
 
     }
 
     apis = [
         [this.getBigTradeReport, async (ctx) => {
             const args = await this.ah.ctx2args(ctx, false, false);
-            await this.getBigTradeReport(args);
+            ctx.body = await this.getBigTradeReport(args);
         }],
     ];
 
