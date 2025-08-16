@@ -10,8 +10,5 @@ createApp({
         initListeners: function () {
             let self = this;
         },
-        downloadDiv: async function () {
-            await captureAndDownload('testId');
-        }
     }
 });

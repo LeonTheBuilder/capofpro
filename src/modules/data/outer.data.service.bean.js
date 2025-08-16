@@ -6,6 +6,8 @@ class OuterDataService {
             data
         } = args;
         //
+        this.log.info(args.dataType);
+        //
         switch (dataType) {
             case 'dzjy':
                 await this.onDzjyData(args);
@@ -20,7 +22,8 @@ class OuterDataService {
             dataType, // dzjy
             data
         } = args;
-
+        //
+        this.log.info(args.dataType);
         // ------------------------------------------------------------
         const tradeDateInt = data.tradeDate;
         const trades = data.trades;
@@ -192,6 +195,8 @@ class OuterDataService {
     apis = [
         [this.onData, async (ctx) => {
             const args = await this.ah.ctx2args(ctx, false, false);
+            this.log.info("---------------");
+            this.log.info(args);
             await this.onData(args);
         }],
     ];

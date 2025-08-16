@@ -1,5 +1,6 @@
 createApp({
     data: {
+        dateInt: null,
         instMap: {},
         stockMap: {},
         bigTradesList: [],
@@ -33,7 +34,10 @@ createApp({
             self.stockMap = stockMap;
             //
             self.bigTradesList = res.data.bigTradesList;
-
-        }
+            self.dateInt = res.data.dateInt;
+        },
+        downloadImage: async function () {
+            await captureAndDownload("dzjyListContainer");
+        },
     }
 });

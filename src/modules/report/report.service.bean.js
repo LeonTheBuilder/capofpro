@@ -18,6 +18,9 @@ class ReportService {
         // ------------------------------------------------
         // big trades
         const bigTrades = await this.StockBigTrade.findAll({
+            where: {
+                dateInt
+            },
             limit: pageSize,
             order: [
                 ['tradeAmount', 'DESC'],
@@ -54,6 +57,7 @@ class ReportService {
 
 
         const ret = {
+            dateInt,
             bigTradesList: bigTrades,
             stocks,
             insts: [...buyInsts, ...sellInsts],
