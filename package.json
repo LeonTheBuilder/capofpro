@@ -1,6 +1,9 @@
 {
-  "name": "leonsagent",
+  "name": "capofpro",
   "version": "1.0.1",
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com"
+  },
   "scripts": {
     "dev": "nodemon src/main.js",
     "prod": "nodemon src/main.js"

@@ -4,8 +4,8 @@ class CopBigTradeReport {
     isReport = true;
     title = '大宗交易报告';
 
-
     // ---------------------------------------------------------------------------------------------------
+
     // 同步大宗交易动作入口
     async generateDataFile() {
         const realtimeQuotes = await this.realtimeQuotes({});
@@ -16,9 +16,7 @@ class CopBigTradeReport {
  # 大宗交易数据
   ${JSON.stringify(blockTrades)}
  `;
-        const id = await this.idgen.next();
-        this.Sugar.writeFile(`${this.pathFinder.appGenFolder()}/${id}.gen.md`, string);
-
+        return string;
     }
 
 
@@ -81,9 +79,30 @@ class CopBigTradeReport {
 
     // 同步具体某一天的大宗交易
     async getPrompts(args) {
-
-
+        const prompts = this.Sugar.readFileContent(this.path.join(__dirname, 'cop.big.trade.report.tpl'));
+        return prompts;
     }
+
+    mappings = [
+        ['/cop/big.trade.report/copBigTradeReport/generate.data.file', 'GET', async (ctx) => {
+            const args = await this.ah.ctx2args(ctx, false, false);
+            const content = await this.generateDataFile(args);
+            ctx.set('Content-Type', 'application/octet-stream');
+            ctx.set('Content-Disposition', 'attachment; filename="long-text.txt"');
+            // 设置内容长度（可选，但推荐）
+            ctx.set('Content-Length', Buffer.byteLength(content).toString());
+            // 将文本内容作为响应体返回
+            ctx.body = content;
+        }]
+    ];
+
+    apis = [
+        [this.getPrompts, async (ctx) => {
+            const args = await this.ah.ctx2args(ctx, false, false);
+            const prompts = await this.getPrompts(args);
+            ctx.body = prompts;
+        }]
+    ];
 
 
 }

@@ -16,11 +16,8 @@
         选择报告
     </div>
     <div class="collapse-content text-sm">
-        <select class="select">
-            <option disabled selected>Server location</option>
-            <option>North America</option>
-            <option>EU west</option>
-            <option>South East Asia</option>
+        <select class="select" v-model="targetReport">
+            <option v-for="report in reports" :value="report">${report.title}</option>
         </select>
     </div>
 </div>
@@ -32,7 +29,7 @@
     <div class="collapse-content text-sm">
         从数据库捞取交易数据并保存成文件
         <br>
-        <button class="btn btn-sm">生成数据文件</button>
+        <button class="btn btn-sm" @click="downloadDataFile">下载数据文件</button>
     </div>
 </div>
 <div class="collapse bg-base-100 border border-base-300">
@@ -43,7 +40,11 @@
     <div class="collapse-content text-sm">
         下载数据文件并上传到 Qwen 对话框, 复制 prompt 粘贴到 Qwen 对话框, 由 Qwen 生成内容后, 将生成的内容复制到第三步。
         <br>
-        <button class="btn btn-sm">下载数据文件并复制 Prompt</button>
+        <textarea class="textarea h-50 w-full" v-model="prompt">
+        </textarea>
+        <br><br>
+        <button class="btn btn-sm" @click="copyPrompts">复制 Prompt</button>
+        <a class="btn btn-sm" href="https://chat.qwen.ai/" target="_blank">打开QwenAI</a>
     </div>
 </div>
 <div class="collapse bg-base-100 border border-base-300">
@@ -53,7 +54,7 @@
     </div>
     <div class="collapse-content text-sm">
         将 Qwen 生成的内容粘贴到这里点击生成图文按钮.
-        <br><textarea class="textarea h-50" placeholder="将 Qwen 生成的内容粘贴到这里">
+        <br><textarea class="textarea h-50 w-full" placeholder="将 Qwen 生成的内容粘贴到这里">
 
         </textarea>
         <br><br>

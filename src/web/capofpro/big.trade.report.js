@@ -1,10 +1,8 @@
 createApp({
     data: {
-        step: 1,  // 只做显示用
-        dateInt: null,
-        instMap: {},
-        stockMap: {},
-        bigTradesList: [],
+        reports: [],
+        targetReport: {},
+        prompt: "",
     },
     methods: {
         init: async function () {
@@ -12,33 +10,42 @@ createApp({
             self.initListeners();
             EventOp.pub(CommonEventsDef.page_ready);
         },
-        showStep: function () {
-            return `第${this.step++}步`;
-        },
         initListeners: function () {
             let self = this;
-            EventOp.sub(CommonEventsDef.page_ready, [self.getBigTradeReportData]);
+            EventOp.sub(CommonEventsDef.page_ready, [self.listReports]);
         },
-        getBigTradeReportData: async function () {
+        listReports: async function () {
             let self = this;
             //
-            const res = await reportService.getBigTradeReport();
+            const res = await copReportManager.listReports();
             errMsgIf(res);
             //
-            const instMap = {};
-            for (const inst of res.data.insts) {
-                instMap[inst.id] = inst;
+            self.reports = res.data;
+        },
+        downloadDataFile: async function () {
+            let self = this;
+            const beanName = self.targetReport.name;
+            console.log(beanName);
+            if (!beanName) {
+                toastError("请选择报告");
+                return;
             }
-            self.instMap = instMap;
-            //
-            const stockMap = {};
-            for (const stock of res.data.stocks) {
-                stockMap[stock.id] = stock;
+            await download(`/cop/big.trade.report/${beanName}/generate.data.file`, beanName + ".md");
+        },
+        copyPrompts: async function () {
+            let self = this;
+            const beanName = self.targetReport.name;
+            console.log(beanName);
+            if (!beanName) {
+                toastError("请选择报告");
+                return;
             }
-            self.stockMap = stockMap;
-            //
-            self.bigTradesList = res.data.bigTradesList;
-            self.dateInt = res.data.dateInt;
+            const bean = eval(beanName);
+            const res = await bean.getPrompts();
+            errMsgIf(res);
+            console.log(res);
+            self.prompt = res.data;
+            copy2Clipboard(self.prompt);
         },
         downloadImage: async function () {
             await captureAndDownload("dzjyListContainer");
