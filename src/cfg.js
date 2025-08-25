@@ -3,23 +3,26 @@ const cfgdef = require('aframework/cfgdef');
 //----------------------------------------------------------------
 const cfg = cfgdef();
 //----------------------------------------------------------------
-cfg.app.name = 'capofpro';
+cfg.app.name = 'leonsagent';
 cfg.app.rootFolder = path.join(__dirname, '..');
 const nodeModulesPath = path.join(__dirname, "..", 'node_modules');
 cfg.autowire.folders = [
     __dirname,
+    path.join(nodeModulesPath, "account_service"),
     path.join(nodeModulesPath, "user_service"),
     path.join(nodeModulesPath, "ai_service"),
+    path.join(nodeModulesPath, "message_service"),
 ];
 //----------------------------------------------------------------
-cfg.web.port = 3015;
+cfg.web.port = 3016;
 //----------------------------------------------------------------
-cfg.mysql.database = 'capofpro';
-cfg.mysql.serverTimezone = 'Asia/Shanghai';
-//----------------------------------------------------------------
-cfg.app.storageRoot = process.env.APP_STORAGE_ROOT || '/Users/chence/dev/tmp';
-cfg.app.defaultLlmModel = process.env.APP_DEFAULT_LLM_MODEL || 'qwen-plus';
-cfg.app.tempFolderRoot = process.env.APP_TEMP_FOLDER_ROOT || '/Users/chence/dev/tmp';
+cfg.redis.enabled = true;
+cfg.mysql.enabled = true;
+cfg.mysql.database = "leonsagent";
+cfg.mysql.username = "root";
+cfg.mysql.password = "1qaz2wsx";
+cfg.sqlite.enabled = false;
+cfg.worker.enabled = false;
 //----------------------------------------------------------------
 const userServiceSet = require('user_service/src/cfgset');
 userServiceSet(cfg);

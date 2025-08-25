@@ -269,3 +269,4 @@ package-lock.json
 *.gen.*
 *index.d.ts
 *dev.env
+/depapps/aktools/

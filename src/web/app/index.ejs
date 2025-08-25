@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include(`${appcfg.app.rootFolder}/node_modules/web_resources/src/web/templates/_top.ejs`); %>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+
+<div class="flex flex-col space-y-1">
+
+    <div role="alert" class="alert alert-info alert-soft">
+        <span>12 unread messages. Tap to see.<br><span class="text-xs opacity-50">2025-08-18 18:58:16</span></span>
+    </div>
+    <div role="alert" class="alert alert-success alert-soft">
+        <span>Your purchase has been confirmed!</span>
+    </div>
+    <div role="alert" class="alert alert-warning alert-soft">
+        <span>Warning: Invalid email address!</span>
+    </div>
+    <div role="alert" class="alert alert-error alert-soft">
+        <span>Error! Task failed successfully.</span>
+    </div>
+</div>
+
+
+<ul class="list bg-base-100 rounded-box shadow-md">
+
+
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">capof.pro</li>
+
+    <li class="list-row">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="size-10">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+            </svg>
+        </div>
+        <div>
+            <div>同步交易日数据</div>
+            <div class="text-xs uppercase font-semibold opacity-60">从 akshare 同步 TradingDays 数据</div>
+        </div>
+        <a class="btn btn-square btn-ghost" href="/cop/big.trade.report">
+            <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor">
+                    <path d="M6 3L20 12 6 21 6 3z"></path>
+                </g>
+            </svg>
+        </a>
+    </li>
+    <li class="list-row">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="size-10">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+            </svg>
+        </div>
+        <div>
+            <div>大宗交易文案生成</div>
+            <div class="text-xs uppercase font-semibold opacity-60">生成可发送微博、抖音、小红书的图文内容</div>
+        </div>
+        <a class="btn btn-square btn-ghost" href="/cop/big.trade.report" target="_blank">
+            <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor">
+                    <path d="M6 3L20 12 6 21 6 3z"></path>
+                </g>
+            </svg>
+        </a>
+    </li>
+</ul>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<%- include(`${appcfg.app.rootFolder}/node_modules/web_resources/src/web/templates/_bottom.ejs`); %>
+<script type="text/javascript">
+    <%- include(`${appcfg.app.rootFolder}/src/web/app/index.js`); %>
+</script>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include(`${appcfg.app.rootFolder}/node_modules/web_resources/src/web/templates/_top.ejs`); %>
+<script type="text/javascript" src="/dom-to-image.min.js"></script>
+<!--------------------------------------------------------------------------------------------------------------------->
+
+<div class="flex justify-end">
+    <button class="btn btn-sm btn-error" @click="window.close()">x</button>
+</div>
+
+<div class="p-3 text-xs opacity-60 shadow rounded-box">capof.pro 大宗交易图文生成器</div>
+
+<div class="collapse bg-base-100 border border-base-300">
+    <input type="radio" name="my-accordion-0" checked="checked"/>
+    <div class="collapse-title font-semibold">
+        选择报告
+    </div>
+    <div class="collapse-content text-sm">
+        <select class="select">
+            <option disabled selected>Server location</option>
+            <option>North America</option>
+            <option>EU west</option>
+            <option>South East Asia</option>
+        </select>
+    </div>
+</div>
+<div class="collapse bg-base-100 border border-base-300">
+    <input type="radio" name="my-accordion-1" checked="checked"/>
+    <div class="collapse-title font-semibold">
+        第一步、生成数据文件
+    </div>
+    <div class="collapse-content text-sm">
+        从数据库捞取交易数据并保存成文件
+        <br>
+        <button class="btn btn-sm">生成数据文件</button>
+    </div>
+</div>
+<div class="collapse bg-base-100 border border-base-300">
+    <input type="radio" name="my-accordion-2" checked="checked"/>
+    <div class="collapse-title font-semibold">
+        第二步、Qwen 生成内容
+    </div>
+    <div class="collapse-content text-sm">
+        下载数据文件并上传到 Qwen 对话框, 复制 prompt 粘贴到 Qwen 对话框, 由 Qwen 生成内容后, 将生成的内容复制到第三步。
+        <br>
+        <button class="btn btn-sm">下载数据文件并复制 Prompt</button>
+    </div>
+</div>
+<div class="collapse bg-base-100 border border-base-300">
+    <input type="radio" name="my-accordion-4" checked="checked"/>
+    <div class="collapse-title font-semibold">
+        第三步、生成图文
+    </div>
+    <div class="collapse-content text-sm">
+        将 Qwen 生成的内容粘贴到这里点击生成图文按钮.
+        <br><textarea class="textarea h-50" placeholder="将 Qwen 生成的内容粘贴到这里">
+
+        </textarea>
+        <br><br>
+        <button class="btn btn-sm">生成图文</button>
+    </div>
+</div>
+
+
+<div class="collapse bg-base-100 border border-base-300">
+    <input type="radio" name="my-accordion-3" checked="checked"/>
+    <div class="collapse-title font-semibold">
+        第四步、发送
+    </div>
+    <div class="collapse-content text-sm">
+        发送图文到抖音快手小红书
+
+        <br><br>
+        <button class="btn btn-sm">打开抖音</button>
+        <br><br>
+        <button class="btn btn-sm">打开小红书</button>
+        <br><br>
+        <button class="btn btn-sm">打开快手</button>
+        <br><br>
+        <button class="btn btn-sm">打开微博</button>
+    </div>
+</div>
+
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<%- include(`${appcfg.app.rootFolder}/node_modules/web_resources/src/web/templates/_bottom.ejs`); %>
+<script type="text/javascript">
+    <%- include(`${appcfg.app.rootFolder}/src/web/capofpro/big.trade.report.js`); %>
+</script>
+</html>

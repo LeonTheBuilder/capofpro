@@ -1,19 +1,6 @@
 # 依赖组件安装
 
-安装并启动 aktools
-首先选定一个工作目录，比如 /Users/username/dev/aktoolFolder
-
-搭建 venv 环境
-python3 -m venv venv
-source ./venv/bin/activate
-source ./venv/bin/activate.fish
-
-安装或者更新 aktools
-pip install aktools -i https://pypi.tuna.tsinghua.edu.cn/simple
-pip install aktools --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple
-
-启动 aktools 服务
-python -m aktools
+npm install account_service@git+https://github.com/LeonTheBuilder/account_service.git
 
 验证 aktools 服务，使用浏览器访问
 http://127.0.0.1:8080/api/public/stock_dzjy_mrmx?start_date=20250815&end_date=20250815&symbol=A%E8%82%A1
